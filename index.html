@@ -9,5 +9,48 @@
   <h1>Welcome to MySoftNotes</h1>
   <p>Lecture notes for <strong>@shafaataliedu</strong> YouTube lessons.</p>
   <p>More pages will be added soon 🚀</p>
+
+  <p>
+    Watch and subscribe on
+    <a href="https://www.youtube.com/@shafaataliedu/" target="_blank" rel="noopener"
+      >our YouTube channel</a
+    >.
+  </p>
+
+  <h2>Latest Videos</h2>
+  <div id="videos"></div>
+
+  <script>
+    async function loadVideos() {
+      try {
+        const feedUrl = "https://www.youtube.com/feeds/videos.xml?user=shafaataliedu";
+        const resp = await fetch(feedUrl);
+        const text = await resp.text();
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, "application/xml");
+        const entries = Array.from(xml.querySelectorAll("entry")).slice(0, 3);
+        const container = document.getElementById("videos");
+
+        entries.forEach((entry) => {
+          const videoId = entry.querySelector("yt\\:videoId").textContent;
+          const iframe = document.createElement("iframe");
+          iframe.width = "560";
+          iframe.height = "315";
+          iframe.src = `https://www.youtube.com/embed/${videoId}`;
+          iframe.title = "YouTube video player";
+          iframe.frameBorder = "0";
+          iframe.allow =
+            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+          iframe.allowFullscreen = true;
+          container.appendChild(iframe);
+        });
+      } catch (e) {
+        const container = document.getElementById("videos");
+        container.textContent = "Unable to load videos at this time.";
+      }
+    }
+
+    loadVideos();
+  </script>
 </body>
 </html>
