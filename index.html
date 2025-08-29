@@ -23,8 +23,7 @@
   <script>
     async function loadVideos() {
       try {
-        const channel = "shafaataliedu";
-        const feedUrl = `https://cors.isomorphic-git.org/https://www.youtube.com/feeds/videos.xml?user=${channel}`;
+        const feedUrl = "https://www.youtube.com/feeds/videos.xml?user=shafaataliedu";
         const resp = await fetch(feedUrl);
         const text = await resp.text();
         const parser = new DOMParser();
