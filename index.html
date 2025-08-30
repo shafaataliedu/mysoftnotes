@@ -4,21 +4,61 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Soft Notes</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      margin: 0;
+      font-family: "Roboto", sans-serif;
+      background: #f5f5f5;
+      color: #333;
+    }
+    header {
+      background: #007acc;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+    .video-grid iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: 0;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to MySoftNotes</h1>
-  <p>Lecture notes for <strong>@shafaataliedu</strong> YouTube lessons.</p>
-  <p>More pages will be added soon 🚀</p>
+  <header>
+    <h1>MySoftNotes</h1>
+  </header>
+  <main>
+    <p>Lecture notes for <strong>@shafaataliedu</strong> YouTube lessons.</p>
+    <p>More pages will be added soon 🚀</p>
 
-  <p>
-    Watch and subscribe on
-    <a href="https://www.youtube.com/@shafaataliedu/" target="_blank" rel="noopener"
-      >our YouTube channel</a
-    >.
-  </p>
+    <p>
+      Watch and subscribe on
+      <a
+        href="https://www.youtube.com/@shafaataliedu/"
+        target="_blank"
+        rel="noopener"
+        >our YouTube channel</a
+      >.
+    </p>
 
-  <h2>Latest Videos</h2>
-  <div id="videos"></div>
+    <h2>Latest Videos</h2>
+    <div id="videos" class="video-grid"></div>
+  </main>
 
   <script>
     async function loadVideos() {
@@ -34,8 +74,6 @@
         entries.forEach((entry) => {
           const videoId = entry.querySelector("yt\\:videoId").textContent;
           const iframe = document.createElement("iframe");
-          iframe.width = "560";
-          iframe.height = "315";
           iframe.src = `https://www.youtube.com/embed/${videoId}`;
           iframe.title = "YouTube video player";
           iframe.frameBorder = "0";
