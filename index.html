@@ -1,94 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Soft Notes</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-    rel="stylesheet"
-  />
-  <style>
-    body {
-      margin: 0;
-      font-family: "Roboto", sans-serif;
-      background: #f5f5f5;
-      color: #333;
-    }
-    header {
-      background: #007acc;
-      color: #fff;
-      padding: 1rem;
-      text-align: center;
-    }
-    main {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-    }
-    .video-grid iframe {
-      width: 100%;
-      aspect-ratio: 16/9;
-      border: 0;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Soft Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --primary-color: #007acc;
+            --secondary-color: #f5f5f5;
+            --text-color: #333;
+            --light-text-color: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--light-text-color);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #d1e7ff;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .video-grid iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: 0;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #005f99;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+            nav a {
+                font-size: 0.9rem;
+            }
+            main {
+                margin: 1rem auto;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>MySoftNotes</h1>
-  </header>
-  <main>
-    <p>Lecture notes for <strong>@shafaataliedu</strong> YouTube lessons.</p>
-    <p>More pages will be added soon 🚀</p>
+    <header>
+        <h1>MySoftNotes</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="the-art-of-prompt-engineering.html">Prompt Engineering</a></li>
+                <!-- Add more links here for future pages -->
+            </ul>
+        </nav>
+    </header>
 
-    <p>
-      Watch and subscribe on
-      <a
-        href="https://www.youtube.com/@shafaataliedu/"
-        target="_blank"
-        rel="noopener"
-        >our YouTube channel</a
-      >.
-    </p>
+    <main>
+        <section>
+            <h2>Welcome!</h2>
+            <p>Lecture notes for <strong>@shafaataliedu</strong> YouTube lessons.</p>
+            <p>
+                Watch and subscribe on
+                <a class="cta-button" href="https://www.youtube.com/@shafaataliedu/" target="_blank" rel="noopener">Our YouTube Channel</a>
+            </p>
+        </section>
 
-    <h2>Latest Videos</h2>
-    <div id="videos" class="video-grid"></div>
-  </main>
+        <section>
+            <h2>Latest Videos</h2>
+            <div id="videos" class="video-grid"></div>
+        </section>
+    </main>
 
-  <script>
-    async function loadVideos() {
-      try {
-        const feedUrl = "https://www.youtube.com/feeds/videos.xml?user=shafaataliedu";
-        const resp = await fetch(feedUrl);
-        const text = await resp.text();
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(text, "application/xml");
-        const entries = Array.from(xml.querySelectorAll("entry")).slice(0, 3);
-        const container = document.getElementById("videos");
+    <footer>
+        <p>&copy; 2025 Shafaat Ali. All Rights Reserved.</p>
+    </footer>
 
-        entries.forEach((entry) => {
-          const videoId = entry.querySelector("yt\\:videoId").textContent;
-          const iframe = document.createElement("iframe");
-          iframe.src = `https://www.youtube.com/embed/${videoId}`;
-          iframe.title = "YouTube video player";
-          iframe.frameBorder = "0";
-          iframe.allow =
-            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-          iframe.allowFullscreen = true;
-          container.appendChild(iframe);
-        });
-      } catch (e) {
-        const container = document.getElementById("videos");
-        container.textContent = "Unable to load videos at this time.";
-      }
-    }
+    <script>
+        async function loadVideos() {
+            try {
+                const feedUrl = "https://www.youtube.com/feeds/videos.xml?user=shafaataliedu";
+                const resp = await fetch(feedUrl);
+                const text = await resp.text();
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(text, "application/xml");
+                const entries = Array.from(xml.querySelectorAll("entry")).slice(0, 3);
+                const container = document.getElementById("videos");
 
-    loadVideos();
-  </script>
+                entries.forEach((entry) => {
+                    const videoId = entry.querySelector("yt\\:videoId").textContent;
+                    const iframe = document.createElement("iframe");
+                    iframe.src = `https://www.youtube.com/embed/${videoId}`;
+                    iframe.title = "YouTube video player";
+                    iframe.frameBorder = "0";
+                    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                    iframe.allowFullscreen = true;
+                    container.appendChild(iframe);
+                });
+            } catch (e) {
+                const container = document.getElementById("videos");
+                container.textContent = "Unable to load videos at this time.";
+            }
+        }
+
+        loadVideos();
+    </script>
 </body>
 </html>
