@@ -25,17 +25,12 @@
             min-height: 100vh;
         }
 
-        header {
-            background-color: var(--primary-color);
+        .background-image {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.pexels.com/photos/357514/pexels-photo-357514.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: var(--light-text-color);
-            padding: 1.5rem 1rem;
-            text-align: center;
-            box-shadow: var(--shadow);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
         }
         
         main {
@@ -43,6 +38,29 @@
             margin: 2rem auto;
             padding: 0 1.5rem;
             flex-grow: 1;
+        }
+        
+        header {
+            background: linear-gradient(to right, #005f99, #007acc); /* Added a blue gradient background */
+            color: var(--light-text-color);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: none;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .notes-icon {
+            width: 3rem;
+            height: 3rem;
+            fill: var(--light-text-color);
         }
 
         h2 {
@@ -60,7 +78,7 @@
         }
 
         .notes-list li {
-            background-color: var(--light-text-color);
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 1.5rem;
             border-radius: 8px;
             box-shadow: var(--shadow);
@@ -82,7 +100,7 @@
         footer {
             text-align: center;
             padding: 1.5rem 1rem;
-            color: #777;
+            color: var(--light-text-color);
             font-size: 0.9rem;
             margin-top: 3rem;
         }
@@ -97,14 +115,18 @@
         }
     </style>
 </head>
-<body>
+<body class="background-image">
     <header>
-        <h1>My Soft Notes</h1>
+        <h1>
+            <svg class="notes-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 2H6c-1.103 0-2 .897-2 2v16c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2V8l-6-6zm-2 16h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V8h2v2zm4 4h-2v-2h2v2zm0-4h-2V8h2v2zm0-4h-2V8h2v2zm-2-4v-4l4 4h-4z"/>
+            </svg>
+            My Soft Notes
+        </h1>
     </header>
 
     <main>
         <section>
-            <h2>My Latest Notes</h2>
             <ul id="notes-container" class="notes-list">
                 <!-- Notes will be dynamically added here by JavaScript -->
             </ul>
