@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Art & Science of Prompt Engineering</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        .text-neon-red {
+            color: #FF4E50;
+        }
+        .bg-gradient-orange-yellow {
+            background: linear-gradient(to bottom right, #FC913A, #F9D423);
+        }
+        .bg-pale-green {
+            background-color: #E1F5C4;
+        }
+        .text-slate-950 {
+            color: #1a202c;
+        }
+    </style>
+</head>
+<body class="bg-[#F8F9FA] text-slate-950">
+    
+    <div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-12">
+    
+        <header class="text-center my-12 md:my-16">
+            <h1 class="text-5xl md:text-7xl font-black tracking-tight text-slate-950">The Art & Science of</h1>
+            <h2 class="text-6xl md:text-8xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-amber-500">Prompt Engineering</h2>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-700">Mastering the new language of communication with AI. This guide visualizes the key to unlocking high-quality, relevant, and creative AI-generated content.</p>
+        </header>
+
+        <main class="space-y-16 md:space-y-24">
+
+            <section id="introduction" class="bg-white rounded-xl shadow-2xl p-8 md:p-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="md:order-last">
+                        <div class="flex flex-col items-center">
+                            <span class="text-7xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-amber-500">90%</span>
+                            <span class="text-2xl md:text-3xl font-bold text-slate-800 text-center mt-2">of output quality depends on prompt clarity.</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-extrabold text-slate-950 mb-4">The Prompt is Everything</h3>
+                        <p class="text-slate-600 leading-relaxed">The quality of AI-generated content is overwhelmingly determined by the quality of the input prompt. A well-crafted prompt acts as a precise blueprint for the AI, guiding it to a specific, high-quality outcome rather than a generic response. It is the single most important factor in your interaction with AI models.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="core-principles">
+                <h2 class="text-4xl font-extrabold text-center mb-12 text-slate-950">The 4 Core Principles of Prompting</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    
+                    <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center">
+                        <div class="text-5xl mb-4 text-neon-red">🎯</div>
+                        <h3 class="text-xl font-bold text-slate-950 mb-2">Clarity & Specificity</h3>
+                        <p class="text-slate-600 text-sm">Be direct and detailed. Specify audience, tone, and format to avoid ambiguity and get the exact output you want.</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center">
+                        <div class="text-5xl mb-4 text-neon-red">🎭</div>
+                        <h3 class="text-xl font-bold text-slate-950 mb-2">Provide a Persona</h3>
+                        <p class="text-slate-600 text-sm">Instruct the AI to "act as" a specific role, like a journalist or an expert, to instantly shape its style and expertise.</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center">
+                        <div class="text-5xl mb-4 text-neon-red">🔏</div>
+                        <h3 class="text-xl font-bold text-slate-950 mb-2">Give Constraints</h3>
+                        <p class="text-slate-600 text-sm">Use boundaries for length, content, and format. Tell the AI what to include and, just as importantly, what to exclude.</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center">
+                        <div class="text-5xl mb-4 text-neon-red">🖼️</div>
+                        <h3 class="text-xl font-bold text-slate-950 mb-2">Few-Shot Prompting</h3>
+                        <p class="text-slate-600 text-sm">Provide a few examples of your desired input-output to teach the AI a specific pattern you want it to follow.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="prompt-styles-data" class="bg-white rounded-xl shadow-2xl p-8 md:p-12">
+                 <h2 class="text-3xl font-extrabold text-center mb-6 text-slate-950">A Spectrum of Prompting Styles</h2>
+                 <p class="text-center text-slate-600 max-w-3xl mx-auto mb-10">Different tasks require different approaches. This radar chart visualizes how various prompt styles excel across key attributes, from straightforward efficiency to complex creative exploration.</p>
+                 <div class="chart-container">
+                    <canvas id="stylesRadarChart"></canvas>
+                 </div>
+            </section>
+            
+            <section id="co-t-data" class="bg-white rounded-xl shadow-2xl p-8 md:p-12">
+                <h2 class="text-3xl font-extrabold text-center mb-6 text-slate-950">The Power of "Think Step-by-Step"</h2>
+                <p class="text-center text-slate-600 max-w-3xl mx-auto mb-10">Chain-of-Thought (CoT) prompting is one of the most powerful techniques for complex tasks. By forcing the AI to show its work, you dramatically increase the accuracy and reliability of its final answer, especially as task complexity grows.</p>
+                <div class="chart-container h-96">
+                     <canvas id="cotChart"></canvas>
+                </div>
+            </section>
+
+            <section id="the-journey">
+                <h2 class="text-4xl font-extrabold text-center mb-12 text-slate-950">The Iterative Workflow</h2>
+                <p class="text-center text-slate-600 max-w-3xl mx-auto mb-10">Prompt engineering is a journey, not a destination. It is a continuous cycle of refining your instructions based on the AI's output until you achieve the desired result.</p>
+                <div class="flex flex-col md:flex-row justify-center items-center md:items-start space-y-8 md:space-y-0 md:space-x-8">
+                    
+                    <div class="flex flex-col items-center text-center max-w-[200px]">
+                        <div class="bg-pale-green p-6 rounded-full w-24 h-24 flex items-center justify-center text-5xl font-bold text-slate-950">1</div>
+                        <h3 class="font-bold text-xl mt-4 mb-1">Prompt</h3>
+                        <p class="text-sm text-slate-600">Start with a clear instruction. Give the AI a solid foundation to build upon.</p>
+                    </div>
+                    <div class="text-5xl text-slate-400 self-center transform rotate-90 md:rotate-0">&rarr;</div>
+                    
+                    <div class="flex flex-col items-center text-center max-w-[200px]">
+                        <div class="bg-white border-4 border-slate-300 p-6 rounded-full w-24 h-24 flex items-center justify-center text-5xl font-bold text-slate-950">2</div>
+                        <h3 class="font-bold text-xl mt-4 mb-1">Analyze</h3>
+                        <p class="text-sm text-slate-600">Evaluate the output. Is it close to your goal? Identify areas for improvement.</p>
+                    </div>
+                    <div class="text-5xl text-slate-400 self-center transform rotate-90 md:rotate-0">&rarr;</div>
+                    
+                    <div class="flex flex-col items-center text-center max-w-[200px]">
+                        <div class="bg-pale-green p-6 rounded-full w-24 h-24 flex items-center justify-center text-5xl font-bold text-slate-950">3</div>
+                        <h3 class="font-bold text-xl mt-4 mb-1">Refine</h3>
+                        <p class="text-sm text-slate-600">Add constraints, persona, or examples to get closer to the desired output.</p>
+                    </div>
+                    <div class="text-5xl text-slate-400 self-center transform rotate-90 md:rotate-0">&#8634;</div>
+
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center my-16">
+            <p class="text-slate-600 text-lg">The future of content is conversational. Start practicing today.</p>
+        </footer>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const energeticPalette = {
+                red: '#FF4E50',
+                orange: '#FC913A',
+                yellow: '#F9D423',
+                lightGreen: '#EDE574',
+                paleGreen: '#E1F5C4',
+                darkText: '#27272A',
+                lightText: '#64748B'
+            };
+            
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                } else {
+                    return label;
+                }
+            };
+            
+            const wrapLabel = (label, maxLength = 16) => {
+                if (label.length <= maxLength) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                for (const word of words) {
+                    if ((currentLine + ' ' + word).trim().length > maxLength) {
+                        lines.push(currentLine.trim());
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                }
+                if (currentLine) {
+                    lines.push(currentLine.trim());
+                }
+                return lines;
+            };
+
+            const stylesRadarChartCtx = document.getElementById('stylesRadarChart').getContext('2d');
+            new Chart(stylesRadarChartCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Efficiency', 'Creativity', 'Exploration', 'Accuracy', 'Task Complexity'],
+                    datasets: [{
+                        label: 'Instructional',
+                        data: [9, 2, 3, 8, 4],
+                        fill: true,
+                        backgroundColor: 'rgba(255, 78, 80, 0.2)',
+                        borderColor: energeticPalette.red,
+                        pointBackgroundColor: energeticPalette.red,
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: energeticPalette.red
+                    }, {
+                        label: 'Conversational',
+                        data: [5, 7, 9, 6, 7],
+                        fill: true,
+                        backgroundColor: 'rgba(252, 145, 58, 0.2)',
+                        borderColor: energeticPalette.orange,
+                        pointBackgroundColor: energeticPalette.orange,
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: energeticPalette.orange
+                    },
+                    {
+                        label: 'Analytical',
+                        data: [7, 3, 4, 9, 8],
+                        fill: true,
+                        backgroundColor: 'rgba(249, 212, 35, 0.2)',
+                        borderColor: energeticPalette.yellow,
+                        pointBackgroundColor: energeticPalette.yellow,
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: energeticPalette.yellow
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    elements: {
+                        line: {
+                            borderWidth: 2
+                        }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(100, 116, 139, 0.3)'
+                            },
+                            grid: {
+                                color: 'rgba(100, 116, 139, 0.3)'
+                            },
+                            pointLabels: {
+                                color: energeticPalette.lightText,
+                                font: { size: 12 }
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 10,
+                            ticks: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'top', labels: { boxWidth: 10, color: energeticPalette.darkText } },
+                         tooltip: { callbacks: { title: tooltipTitleCallback } }
+                    }
+                }
+            });
+
+            const cotChartCtx = document.getElementById('cotChart').getContext('2d');
+            new Chart(cotChartCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Low', 'Medium', 'High', 'Very High', 'Extreme'],
+                    datasets: [{
+                        label: 'Accuracy without CoT',
+                        data: [90, 85, 70, 50, 30],
+                        borderColor: energeticPalette.orange,
+                        backgroundColor: 'rgba(252, 145, 58, 0.2)',
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'Accuracy with CoT',
+                        data: [92, 90, 88, 85, 75],
+                        borderColor: energeticPalette.red,
+                        backgroundColor: 'rgba(255, 78, 80, 0.2)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) { return value + "%" },
+                                color: energeticPalette.darkText
+                            },
+                            grid: {
+                                color: 'rgba(100, 116, 139, 0.3)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Task Complexity',
+                                color: energeticPalette.darkText
+                            },
+                            ticks: {
+                                color: energeticPalette.darkText
+                            },
+                            grid: {
+                                color: 'rgba(100, 116, 139, 0.3)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'top', labels: { color: energeticPalette.darkText } },
+                        tooltip: { callbacks: { title: tooltipTitleCallback } }
+                    }
+                }
+            });
+
+            const clarityChartCtx = document.getElementById('clarityChart');
+            if (clarityChartCtx) {
+                new Chart(clarityChartCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Vague Prompt', 'Specific Prompt'],
+                        datasets: [{
+                            label: 'Output Quality Score',
+                            data: [35, 95],
+                            backgroundColor: ['#E1F5C4', '#FF4E50'],
+                            borderColor: ['#E1F5C4', '#FF4E50'],
+                            borderWidth: 1,
+                            borderRadius: 5
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: { 
+                                beginAtZero: true, 
+                                max: 100,
+                                ticks: { color: energeticPalette.darkText }
+                            },
+                            y: { ticks: { color: energeticPalette.darkText } }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { callbacks: { title: tooltipTitleCallback } }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
